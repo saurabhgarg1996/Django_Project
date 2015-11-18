@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Branch Change Portal {% endblock %}
+{% block user %} | {{user.username}} {% endblock %}
+{% block nav %} <a class="btn btn-success" href="/logout/" role="button">Logout</a>{% endblock %}
+{% block head %}
+Welcome to the Branch Change Portal of IITB
+{% endblock %}
+
+{% block content %} 
+		<h4 class="page-header"> Applications for Branch change : </h4>
+		{% if data %}
+		<div >
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Roll No.</th>
+                <th>Name</th>
+                <th>CPI</th>
+                <th>Category</th>
+                <th>Present Batch</th>
+                <th>Preferences  In Order</th>
+              </tr>
+            </thead>
+             <tbody>
+            {% for dt in data %}
+           
+              <tr>
+                <td>{{ dt.roll_number}}</td>
+                <td>{{ dt.first_name}} {{ dt.last_name }}</td>
+                <td>{{ dt.cpi }}</td>
+                <td>{{ dt.category }}</td>
+                <td>{{ dt.present_branch }}</td>
+                <td>{{ dt.preference_1 }} {% if dt.preference_2 != "None" %} , {{ dt.preference_2 }} {% endif %} {% if dt.preference_3 != "None" %} , {{ dt.preference_3 }} {% endif %} {% if dt.preference_4 != "None" %} , {{ dt.preference_4 }}, {% endif %} 
+                <br> {% if dt.preference_5 != "None" %} {{ dt.preference_5 }} , {% endif %} {% if dt.preference_6 != "None" %}  {{ dt.preference_6 }} , {% endif %} {% if dt.preference_7 != "None" %}  {{ dt.preference_7 }} ,{% endif %} {% if dt.preference_8 != "None" %}  {{ dt.preference_8 }} , {% endif %} <br> {% if dt.preference_9 != "None" %}  {{ dt.preference_9 }} ,{% endif %} {% if dt.preference_10 != "None" %}  {{ dt.preference_10 }} , {% endif %} {% if dt.preference_11 != "None" %} {{ dt.preference_11 }}  , {% endif %} {% if dt.preference_12 != "None" %} {{ dt.preference_12 }} , {% endif %} <br> {% if dt.preference_13 != "None" %} {{ dt.preference_13 }} , {% endif %} {% if dt.preference_14 != "None" %} {{ dt.preference_14 }} , {% endif %} {% if dt.preference_15 != "None" %} {{ dt.preference_15 }} , {% endif %} {% if dt.preference_16 != "None" %} {{ dt.preference_16 }} {% endif %}  </td>
+              </tr>
+            
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+		{% else %}
+			<p>No data.</p>
+		{% endif %}
+		<hr>
+	<div class="col-md-4"></div><div class="col-md-3">
+
+<a class='btn btn-lg btn-primary btn-block' href="/download/Applied_Students.csv" role="button">Download as CSV</a>
+<hr>
+<a class='btn btn-lg btn-primary btn-block' href="/admin1/" role="button">Admin Home</a>
+<hr>
+</div>
+{% endblock %}

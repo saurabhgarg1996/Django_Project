@@ -1,0 +1,597 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Django Login Application |
+        Branch Change Portal</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/jumbotron.css' %}" rel="stylesheet">
+    <link href="{% static 'css/sticky-footer-navbar.css' %}" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Branch Change Allocation | {{user.username}}</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+         <div class="navbar-form navbar-right">
+        <a class="btn btn-success" href="/logout/" role="button">Logout</a>
+         </div>
+        </div>
+    </nav>
+    <div class="jumbotron">
+      <div class="container">
+        <h2>Welcome to the Branch Change Portal of IITB
+</h2>
+       	</div>
+    </div>
+
+    <div class="container">
+    	<h3 class="page-header"> Enter your Branch Change Details: </h3>
+	    <form action="/fillform/" method="post" class="form-horizontal" >
+	    {% csrf_token %}
+	    <div class="form-group has-error">
+	    <span class="help-block">{{ s.non_field_errors }}</span>
+	    </div>
+	    {% if s.first_name.errors %}
+		<div class="form-group has-error">
+	    	<label class="col-sm-2 control-label" for="id_{{ s.first_name.name }}">First Name</label>
+	    	<div class="col-sm-6">
+				<input type="text" class="form-control" name="{{ s.first_name.name }}" id="id_{{ s.first_name.name }}"  placeholder="Enter Your First Name">
+				<span class="help-block">{{ s.first_name.errors }}</span>
+		</div>
+		</div>
+		{% else %}
+		{% if s.first_name.value %}
+		<div class="form-group" >
+		    <label class="col-sm-2 control-label" for="id_{{ s.first_name.name }}">First Name</label>
+	    	<div class="col-sm-6">
+  				<input type="text" class="form-control" name="{{ s.first_name.name }}" id="id_{{ s.first_name.name }}" value="{{ s.first_name.value }}" placeholder="Enter Your First Name">
+			</div>
+		</div>
+		{% else %}
+		<div class="form-group" >
+		    <label class="col-sm-2 control-label" for="id_{{ s.first_name.name }}">First Name</label>
+	    	<div class="col-sm-6">
+  				<input type="text" class="form-control" name="{{ s.first_name.name }}" id="id_{{ s.first_name.name }}" placeholder="Enter Your First Name">
+			</div>
+		</div>
+		{% endif %}
+		{% endif %}
+
+	 
+	    {% if s.last_name.errors %}
+	    <div class="form-group has-error">
+	    	<label class="col-sm-2 control-label" for="id_{{ s.last_name.name }}">Last Name</label>
+	    	<div class="col-sm-6">
+				<input type="text" class="form-control" name="{{ s.last_name.name }}" id="id_{{ s.last_name.name }}" placeholder="Enter Your Last Name" >
+				<span class="help-block">{{ s.last_name.errors }}</span>
+			</div>
+		</div>
+		{% else %}
+		{% if s.last_name.value %}
+		<div class="form-group" >
+	 		<label class="col-sm-2 control-label" for="id_{{ s.last_name.name }}">Last Name</label>
+	 		<div class="col-sm-6">
+  				<input type="text" class="form-control" name="{{ s.last_name.name }}" id="id_{{ s.last_name.name }}" value="{{ s.last_name.value }}" >
+			</div>
+		</div>
+		{% else %}
+		<div class="form-group" >
+	 		<label class="col-sm-2 control-label" for="id_{{ s.last_name.name }}">Last Name</label>
+	 		<div class="col-sm-6">
+  				<input type="text" class="form-control" name="{{ s.last_name.name }}" id="id_{{ s.last_name.name }}" placeholder="Enter Your Last Name" >
+			</div>
+		</div>
+		{% endif %}
+		{% endif %}
+
+		{% if s.roll_number.errors %}
+	    <div class="form-group has-error">
+	    	<label class="col-sm-2 control-label" for="id_{{ s.roll_number.name }}">Roll Number</label>
+	    	<div class="col-sm-6">
+				<input type="text" class="form-control" name="{{ s.roll_number.name }}" id="id_{{ s.roll_number.name }}" placeholder="Enter Your 15XXXXXXX Roll no." >
+				<span class="help-block">{{ s.roll_number.errors }}</span>
+			</div>
+		</div>
+		{% else %}
+		{% if s.roll_number.value %}
+		<div class="form-group" >
+	 		<label class="col-sm-2 control-label" for="id_{{ s.roll_number.name }}">Roll Number</label>
+	 		<div class="col-sm-6">
+  				<input type="text" class="form-control" name="{{ s.roll_number.name }}" id="id_{{ s.roll_number.name }}" value="{{ s.roll_number.value }}" >
+			</div>
+		</div>
+		{% else %}
+		<div class="form-group" >
+	 		<label class="col-sm-2 control-label" for="id_{{ s.roll_number.name }}">Roll Number</label>
+	 		<div class="col-sm-6">
+  				<input type="text" class="form-control" name="{{ s.roll_number.name }}" id="id_{{ s.roll_number.name }}" placeholder="Enter Your 15XXXXXXX Roll no." >
+			</div>
+		</div>
+		{% endif %}
+		{% endif %}
+
+		{% if s.cpi.errors %}
+	    <div class="form-group has-error">
+	    	<label class="col-sm-2 control-label" for="id_{{ s.cpi.name }}">CPI</label>
+	    	<div class="col-sm-6">
+				<input type="text" class="form-control" name="{{ s.cpi.name }}" id="id_{{ s.cpi.name }}" placeholder="Enter Your Valid CPI" >
+				<span class="help-block">{{ s.cpi.errors }}</span>
+			</div>
+		</div>
+		{% else %}
+			{% if s.cpi.value %}
+			<div class="form-group" >
+		 		<label class="col-sm-2 control-label" for="id_{{ s.cpi.name }}">CPI</label>
+		 		<div class="col-sm-6">
+	  				<input type="text" class="form-control" name="{{ s.cpi.name }}" id="id_{{ s.cpi.name }}" value="{{ s.cpi.value }}">
+				</div>
+			</div>
+			{% else %}
+			<div class="form-group" >
+		 		<label class="col-sm-2 control-label" for="id_{{ s.cpi.name }}">CPI</label>
+		 		<div class="col-sm-6">
+	  				<input type="text" class="form-control" name="{{ s.cpi.name }}" id="id_{{ s.cpi.name }}" placeholder="Enter Your Valid CPI">
+				</div>
+			</div>
+			{% endif %}
+		{% endif %}
+	 	
+	 	{% if s.present_branch.errors %}
+	 	<div class="form-group has-error" id="preference_0_tbody" >
+	 		<label class="col-sm-2 control-label" >Present Branch </label>
+	 		<div class="col-sm-6">
+  				<select class="form-control	"name="{{ s.present_branch.name }}" id ="preference_0_select" onchange="showForm(0);">
+				       	<!-- <option value="{{tmp_key}}">{{tmp_value}}</option> -->
+				    {% for value,text in s.present_branch.field.choices %}
+				        <option value="{{ value }}">{{ text}}</option>
+				    {% endfor %}
+				</select>
+				<span class="help-block">{{ s.present_branch.errors }}</span>
+			</div>
+		</div>
+	 	{% else %}
+		<div class="form-group" id="preference_0_tbody" >
+	 		<label class="col-sm-2 control-label" >Present Branch </label>
+	 		<div class="col-sm-6">
+  				<select class="form-control	"name="{{ s.present_branch.name }}" id ="preference_0_select" onchange="showForm(0);">
+				       	<!-- <option value="{{tmp_key}}">{{tmp_value}}</option> -->
+				    {% for value,text in s.present_branch.field.choices %}
+				        <option value="{{ value }}">{{ text}}</option>
+				    {% endfor %}
+				</select>
+			</div>
+		</div>
+		{% endif %}
+
+		<div class="form-group" >
+	 		<label class="col-sm-2 control-label" > Category </label>
+	 		<div class="col-sm-2">
+  			<select class="form-control" name="{{ s.category.name }}" id="category">
+			    {% for value,text in s.category.field.choices %}
+			        <option value="{{ value }}">{{ text}}</option>
+			    {% endfor %}
+  			</select>
+			</div>
+		</div>
+		{% if s.preference_1.errors %}
+		<div class="form-group has-error" style="display:none" id='preference_1_tbody'>
+	 		<label class="col-sm-2 control-label" >First Preference </label>
+	 		<div class="col-sm-6">
+	 			<select class="form-control" name="{{ s.preference_1.name }}" id="preference_1_select" onchange="showForm(1);">
+				    {% for value,text in s.preference_1.field.choices %}
+				        <option value="{{ value }}">{{ text}}</option>
+				    {% endfor %}
+				</select>
+				<span class="help-block">{{ s.preference_1.errors }}</span>
+			</div>
+		</div>
+		{% else %}
+		<div class="form-group" style="display:none" id='preference_1_tbody'>
+	 		<label class="col-sm-2 control-label" >First Preference </label>
+	 		<div class="col-sm-6">
+	 			<select class="form-control" name="{{ s.preference_1.name }}" id="preference_1_select" onchange="showForm(1);">
+				    {% for value,text in s.preference_1.field.choices %}
+				        <option value="{{ value }}">{{ text}}</option>
+				    {% endfor %}
+				</select>
+			</div>
+		</div>
+		{% endif %}
+		<div class="form-group" style="display:none" id='preference_2_tbody' >
+	 		<label class="col-sm-2 control-label" >Second Preference </label>
+	 		<div class="col-sm-6">
+	 			<select class="form-control" name="{{ s.preference_2.name }}" id="preference_2_select" onchange="showForm(2);">
+				    {% for value,text in s.preference_2.field.choices %}
+				        <option value="{{ value }}">{{ text}}</option>
+				    {% endfor %}
+				</select>
+			</div>
+		</div>	
+		
+		<div class="form-group" style="display:none" id='preference_3_tbody' >
+	 		<label class="col-sm-2 control-label" >Third Preference </label>
+	 		<div class="col-sm-6">
+	 			<select class="form-control" name="{{ s.preference_3.name }}" id="preference_3_select" onchange="showForm(3);">
+				    {% for value,text in s.preference_3.field.choices %}
+				        <option value="{{ value }}">{{ text}}</option>
+				    {% endfor %}
+				</select>
+			</div>
+		</div>		
+		<div class="form-group" style="display:none" id='preference_4_tbody' >
+	 		<label class="col-sm-2 control-label" >Fourth Preference </label>
+	 		<div class="col-sm-6">
+	 			<select class="form-control" name="{{ s.preference_4.name }}" id="preference_4_select" onchange="showForm(4);">
+				    {% for value,text in s.preference_4.field.choices %}
+				        <option value="{{ value }}">{{ text}}</option>
+				    {% endfor %}
+				</select>
+			</div>
+		</div>		 	
+		<div class="form-group" style="display:none" id='preference_5_tbody' >
+	 		<label class="col-sm-2 control-label" >Fifth Preference </label>
+	 		<div class="col-sm-6">
+	 			<select class="form-control" name="{{ s.preference_5.name }}" id="preference_5_select" onchange="showForm(5);">
+				    {% for value,text in s.preference_5.field.choices %}
+				        <option value="{{ value }}">{{ text}}</option>
+				    {% endfor %}
+				</select>
+			</div>
+		</div>	
+		<div class="form-group" style="display:none" id='preference_6_tbody' >
+	 		<label class="col-sm-2 control-label" >Sixth Preference </label>
+	 		<div class="col-sm-6">
+	 			<select class="form-control" name="{{ s.preference_6.name }}" id="preference_6_select" onchange="showForm(6);">
+				    {% for value,text in s.preference_6.field.choices %}
+				        <option value="{{ value }}">{{ text}}</option>
+				    {% endfor %}
+				</select>
+			</div>
+		</div>	
+		<div class="form-group" style="display:none" id='preference_7_tbody' >
+	 		<label class="col-sm-2 control-label" >Seventh Preference </label>
+	 		<div class="col-sm-6">
+	 			<select class="form-control" name="{{ s.preference_7.name }}" id="preference_7_select" onchange="showForm(7);">
+				    {% for value,text in s.preference_7.field.choices %}
+				        <option value="{{ value }}">{{ text}}</option>
+				    {% endfor %}
+				</select>
+			</div>
+		</div>	
+		<div class="form-group" style="display:none" id='preference_8_tbody' >
+	 		<label class="col-sm-2 control-label" >Eigth Preference </label>
+	 		<div class="col-sm-6">
+	 			<select class="form-control" name="{{ s.preference_8.name }}" id="preference_8_select" onchange="showForm(8);">
+				    {% for value,text in s.preference_8.field.choices %}
+				        <option value="{{ value }}">{{ text}}</option>
+				    {% endfor %}
+				</select>
+			</div>
+		</div>	
+		<div class="form-group" style="display:none" id='preference_9_tbody' >
+	 		<label class="col-sm-2 control-label" >Ninth Preference </label>
+	 		<div class="col-sm-6">
+	 			<select class="form-control" name="{{ s.preference_9.name }}" id="preference_9_select" onchange="showForm(9);">
+				    {% for value,text in s.preference_9.field.choices %}
+				        <option value="{{ value }}">{{ text}}</option>
+				    {% endfor %}
+				</select>
+			</div>
+		</div>	
+		<div class="form-group" style="display:none" id='preference_10_tbody' >
+	 		<label class="col-sm-2 control-label" >Tenth Preference </label>
+	 		<div class="col-sm-6">
+	 			<select class="form-control" name="{{ s.preference_10.name }}" id="preference_10_select" onchange="showForm(10);">
+				    {% for value,text in s.preference_10.field.choices %}
+				        <option value="{{ value }}">{{ text}}</option>
+				    {% endfor %}
+				</select>
+			</div>
+		</div>	
+		<div class="form-group" style="display:none" id='preference_11_tbody' >
+	 		<label class="col-sm-2 control-label" >Eleventh Preference </label>
+	 		<div class="col-sm-6">
+	 			<select class="form-control" name="{{ s.preference_11.name }}" id="preference_11_select" onchange="showForm(11);">
+				    {% for value,text in s.preference_11.field.choices %}
+				        <option value="{{ value }}">{{ text}}</option>
+				    {% endfor %}
+				</select>
+			</div>
+		</div>	
+		<div class="form-group" style="display:none" id='preference_12_tbody' >
+	 		<label class="col-sm-2 control-label" >Twelvth Preference </label>
+	 		<div class="col-sm-6">
+	 			<select class="form-control" name="{{ s.preference_12.name }}" id="preference_12_select" onchange="showForm(12);">
+				    {% for value,text in s.preference_12.field.choices %}
+				        <option value="{{ value }}">{{ text}}</option>
+				    {% endfor %}
+				</select>
+			</div>
+		</div>	
+		<div class="form-group" style="display:none" id='preference_13_tbody' >
+	 		<label class="col-sm-2 control-label" >Thirteen Preference </label>
+	 		<div class="col-sm-6">
+	 			<select class="form-control" name="{{ s.preference_13.name }}" id="preference_13_select" onchange="showForm(13);">
+				    {% for value,text in s.preference_13.field.choices %}
+				        <option value="{{ value }}">{{ text}}</option>
+				    {% endfor %}
+				</select>
+			</div>
+		</div>	
+		<div class="form-group" style="display:none" id='preference_14_tbody' >
+	 		<label class="col-sm-2 control-label" >Fourteen Preference </label>
+	 		<div class="col-sm-6">
+	 			<select class="form-control" name="{{ s.preference_14.name }}" id="preference_14_select" onchange="showForm(14);">
+				    {% for value,text in s.preference_14.field.choices %}
+				        <option value="{{ value }}">{{ text}}</option>
+				    {% endfor %}
+				</select>
+			</div>
+		</div>	
+		<div class="form-group" style="display:none" id='preference_15_tbody' >
+	 		<label class="col-sm-2 control-label" >Fifteen Preference </label>
+	 		<div class="col-sm-6">
+	 			<select class="form-control" name="{{ s.preference_15.name }}" id="preference_15_select" onchange="showForm(15);">
+				    {% for value,text in s.preference_15.field.choices %}
+				        <option value="{{ value }}">{{ text}}</option>
+				    {% endfor %}
+				</select>
+			</div>
+		</div>	
+		<div class="form-group" style="display:none" id='preference_16_tbody' >
+	 		<label class="col-sm-2 control-label" >Sixteen Preference </label>
+	 		<div class="col-sm-6">
+	 			<select class="form-control" name="{{ s.preference_16.name }}" id="preference_16_select" onchange="showForm(16);">
+				    {% for value,text in s.preference_16.field.choices %}
+				        <option value="{{ value }}">{{ text}}</option>
+				    {% endfor %}
+				</select>
+			</div>
+		</div>	
+		<hr>
+	     <div class="col-md-2"></div><div class="col-md-3">
+	     <button class='btn btn-info' onclick="clicked();" type="submit">Submit</button>
+	     </div>
+	     <div class="col-md-4"></div><div class="col-md-3">
+	     <a class='btn btn-info' href="/fillform/" role="button">Reset</a>
+	     </div>
+		</form>
+
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">&copy; !Just Coders</p>
+      </div>
+    </footer>
+    </div> 
+    <script  type="text/javascript">
+    	function sel(i)
+		{
+			var preference='preference_';
+			var select='_select';
+			var start=preference.concat(i.toString());
+			start=start.concat(select);
+			return start;
+		}
+
+		function tbod(i)
+		{
+			var preference='preference_';
+			var tbody='_tbody'
+			var start=preference.concat(i.toString());
+			start=start.concat(tbody);
+			return start;
+		}		
+		function showFormInitialize(num)
+		{
+			for(i=num;i>=0;i--)
+			{
+				var remove=document.getElementById(sel(i)).value;
+				for(j=i+1;j<=16;j++)
+				{
+					var element=document.getElementById(sel(j));
+					for(k=0;k<element.length;k++)
+					{
+						if(element.options[k].value==remove)
+							element.remove(k);
+					}
+				}
+			}
+
+			if(num<=15)
+			{
+				// alert("tbody");
+				document.getElementById(tbod(num+1)).style.display = "block";
+				if(num<=14)
+				{
+					for(i=num+2;i<=16;i++)
+					{
+						document.getElementById(tbod(i)).style.display = "none";
+					}
+				}
+			}
+		}
+		function showForm(num)
+		{
+			//console.log(num);
+			var BRANCH='{"BRANCHES":['+
+			'{"val":"None","text":"None"},'+
+			'{"val":"AE B.Tech","text":"Aerospace Engineering B.Tech"},'+
+			'{"val":"CL B.Tech","text":"Chemical Engineering B.Tech"},'+
+			'{"val":"CL Dual Deg","text":"Chemical Engineering Dual Degree"},'+
+			'{"val":"CH","text":"Chemistry"},'+
+			'{"val":"CE B.Tech","text":"Civil Engineering B.Tech"},'+
+			'{"val":"CS B.Tech","text":"Computer Science and Engineering B.Tech"},'+
+			'{"val":"EE B.Tech","text":"Electrical Engineering B.Tech"},'+
+			'{"val":"EE Dual Deg E1","text":"Electrical Engineering Dual Degree E1"},'+
+			'{"val":"EE Dual Deg E2","text":"Electrical Engineering Dual Degree E2"},'+
+			'{"val":"EN Dual Deg","text":"Energy Science and Engineering Dual Degree"},'+
+			'{"val":"EP B.Tech","text":"Engineering Physics B.Tech"},'+
+			'{"val":"EP Dual Deg N1","text":"Engineering Physics Dual Degree N1"},'+
+			'{"val":"ME B.Tech","text":"Mechanical Engineering B.Tech"},'+
+			'{"val":"ME Dual Deg M2","text":"Mechanical Engineering Dual Degree M2"},'+
+			'{"val":"MM B.Tech","text":"Metallurgical Engineering B.Tech"},'+
+			'{"val":"MM Dual Deg Y1","text":"Metallurgical Engineering Dual Degree Y1"},'+
+			'{"val":"MM Dual Deg Y2","text":"Metallurgical Engineering Dual Degree Y2" }]}';
+			
+			var obj = JSON.parse(BRANCH);
+			var str1=document.getElementById(sel(num)).value;
+			var str2="None";		
+			var flag=str1.localeCompare(str2);
+			if(flag!=0)
+			{
+				for(i=num+1;i<=16;i++)
+				{
+					var element=document.getElementById(sel(i));
+					for(j=element.length-1;j>=0;j--)
+					{
+						element.remove(j);
+					}
+					for(j=0;j<=17;j++)
+					{
+						var opt = document.createElement('option');
+						opt.value=obj.BRANCHES[j].val;
+						opt.innerHTML=obj.BRANCHES[j].text;
+						element.appendChild(opt);
+					}
+				}
+
+				for(i=num;i>=0;i--)
+				{
+					var remove=document.getElementById(sel(i)).value;
+					for(j=i+1;j<=16;j++)
+					{
+						var element=document.getElementById(sel(j));
+						for(k=0;k<element.length;k++)
+						{
+							if(element.options[k].value==remove)
+								element.remove(k);
+						}
+					}
+				}
+
+				
+				if(num<=15)
+				{
+					// alert("tbody");
+					document.getElementById(tbod(num+1)).style.display = "block";
+					if(num<=14)
+					{
+						for(i=num+2;i<=16;i++)
+						{
+							document.getElementById(tbod(i)).style.display = "none";
+						}
+					}
+				}
+				
+
+			}
+			else
+			{
+				for(i=num;i<=16;i++)
+				{
+					var element=document.getElementById(sel(i));
+					for(j=element.length-1;j>=0;j--)
+					{
+						element.remove(j);
+					}
+					for(j=0;j<=17;j++)
+					{
+						var opt = document.createElement('option');
+						opt.value=obj.BRANCHES[j].val;
+						opt.innerHTML=obj.BRANCHES[j].text;
+						element.appendChild(opt);
+					}
+				}
+
+				for(i=num-1;i>=0;i--)
+				{
+					var remove=document.getElementById(sel(i)).value;
+					for(j=i+1;j<=16;j++)
+					{
+						var element=document.getElementById(sel(j));
+						for(k=0;k<element.length;k++)
+						{
+							if(element.options[k].value==remove)
+								element.remove(k);
+						}
+					}
+				}
+
+				if(num<=15)
+				{
+					for(j=num+1;j<=16;j++)
+					{
+						document.getElementById(tbod(j)).style.display="none";
+					}
+				}
+				
+			}
+
+		// 	// var selopt = document.getElementById("present_select").value;
+		// 	for(i=num+1;i<17;i++){
+		// 		// alert(start);
+		// 		var sel=document.getElementById(start);
+		// 		for (j=0;j<sel.length;  j++) {
+		// 		   if (sel.options[j].value==selopt) {
+		// 		     sel.remove(j);
+		// 		   }
+		// 		}
+		// 	}
+		// var show=preference.concat((num+1).toString());
+		// show=show.concat(tbody);
+		// documsent.getElementById(show).style.display = "block";
+		}
+
+		{% if bool %}	
+		window.onload=f;
+		{% endif %}
+
+		function f()
+			{	
+				var i=0;
+				while(document.getElementById(sel(i)).value!="None"&&i!=16){
+				showFormInitialize(i);
+				i++;			
+				}
+			}
+
+    </script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript">
+    function clicked() {
+    var e = document.getElementById("category");
+	var strUser = e.options[e.selectedIndex].text;
+  	var f =document.getElementById("id_{{ s.cpi.name }}")
+	var cpiUser = f.value;
+
+	    if ( strUser == "GEN" || strUser == "OBC" )
+	    {
+	    	if( cpiUser < 8.0 && cpiUser)
+	    	{
+	    		alert("Your CPI is low for Eligiblity of Branch Change");
+	    	}
+	    }
+	    if ( strUser == "SC" || strUser == "ST" )
+	    {
+	    	if( cpiUser < 7.0 && cpiUser)
+	    	{
+	    		alert("Your CPI is low for Eligiblity of Branch Change");
+	    	}
+	    }
+     
+    }
+    </script>
+  </body>
+</html>
+
+

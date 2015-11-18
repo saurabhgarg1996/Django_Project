@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Branch Change Portal {% endblock %}
+{% block user %} | {{user.username}} {% endblock %}
+{% block nav %} <a class="btn btn-success" href="/logout/" role="button">Logout</a>{% endblock %}
+{% block head %}
+Welcome to the Branch Change Portal of IITB
+{% endblock %}
+{% block content %}
+	<h4 class="page-header"> Filled Data: </h4>
+	<div >
+          <table class="table table-striped">
+
+            <tbody>
+              <tr>
+                <td>Roll Number</td>
+                <td> {{ data.roll_number }}</td>
+              </tr>
+              <tr>
+                <td>Name </td>
+                <td> {{ data.first_name }} {{ data.last_name }}</td>
+              </tr>
+              <tr>
+                <td>Category</td>
+                <td> {{ data.category }}</td>
+              </tr>
+              <tr>
+                <td>CPI</td>
+                <td> {{ data.cpi }}</td>
+              </tr>
+              <tr>
+                <td>Present Branch</td>
+                <td> {{ data.get_present_branch_display }}</td>
+              </tr>
+              <tr>
+                <td>First Preference</td>
+                <td> {{ data.get_preference_1_display }}</td>
+              </tr>
+              {% if data.preference_2 != "None" %}
+              <tr>
+                <td>Second Preference</td>
+                <td> {{ data.get_preference_2_display }}</td>
+              </tr>
+              {% endif %}
+
+              {% if data.preference_3 != "None" %}
+              <tr>
+                <td>Third Preference</td>
+                <td> {{ data.get_preference_3_display }}</td>
+              </tr>
+              {% endif %}
+              {% if data.preference_4 != "None" %}
+              <tr>
+                <td>Fourth Preference</td>
+                <td> {{ data.get_preference_4_display }}</td>
+               </tr>
+               {% endif %}
+              {% if data.preference_5 != "None" %} 
+              <tr>
+                <td>Fifth Preference</td>
+                <td> {{ data.get_preference_5_display }}</td>
+              </tr>
+              {% endif %}
+              {% if data.preference_6 != "None" %}
+              <tr>
+                <td>Sixth Preference</td>
+                <td> {{ data.get_preference_6_display }}</td>
+              </tr>
+              {% endif %}
+              {% if data.preference_7 != "None" %}
+              <tr>
+                <td>Seven Preference</td>
+                <td> {{ data.get_preference_7_display }}</td>
+              </tr>
+              {% endif %}
+              {% if data.preference_8 != "None" %}
+              <tr>
+                <td>Eighth Preference</td>
+                <td> {{ data.get_preference_8_display }}</td>
+              </tr>
+              {% endif %}
+              {% if data.preference_9 != "None" %}
+              <tr>
+                <td>Ninth Preference</td>
+                <td> {{ data.get_preference_9_display }}</td>
+              </tr>
+              {% endif %}
+              {% if data.preference_10 != "None" %}
+              <tr>
+                <td>Tenth Preference</td>
+                <td> {{ data.get_preference_10_display }}</td>
+              </tr>
+              {% endif %}
+              {% if data.preference_11 != "None" %}
+              <tr>
+                <td>Eleventh Preference</td>
+                <td> {{ data.get_preference_11_display }}</td>
+              </tr>
+              {% endif %}
+              {% if data.preference_12 != "None" %}
+              <tr>
+                <td>Twelth Preference</td>
+                <td> {{ data.get_preference_12_display }}</td>
+              </tr>
+              {% endif %}
+              {% if data.preference_13 != "None" %}
+              <tr>
+                <td>Thirteenth Preference</td>
+                <td> {{ data.get_preference_13_display }}</td>
+              </tr>
+              {% endif %}
+              {% if data.preference_14 != "None" %}
+              <tr>
+                <td>Forteenth Preference</td>
+                <td> {{ data.get_preference_14_display }}</td>
+              </tr>
+              {% endif %}
+              {% if data.preference_15 != "None" %}
+              <tr>
+                <td>Fifteenth Preference</td>
+                <td> {{ data.get_preference_15_display }}</td>
+              </tr>
+              {% endif %}
+              {% if data.preference_16 != "None" %}
+              <tr>
+                <td>Sisteenth Preference</td>
+                <td> {{ data.get_preference_16_display }}</td>
+              </tr>
+              {% endif %}
+            </tbody>
+          </table>
+    </div>
+    <hr>
+    <div class="col-md-4"></div><div class="col-md-3">
+    <form action="/update/" method="post"> {% csrf_token %}
+    	
+    	<button class='btn btn-info' type="submit">Update</button>	
+    </form>
+<!-- <a class='btn btn-lg btn-primary btn-block' href="/fillform/" role="button">Update</a>
+ --></div>
+
+</div>
+{% endblock %}

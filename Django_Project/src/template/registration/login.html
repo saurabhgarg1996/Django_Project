@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Branch Change Portal{% endblock %}
+{% block nav %}<a class="btn btn-success" href="/register" role="button">Register</a>{% endblock %}
+{% block head %}Welcome to Branch Change Portal{% endblock %}
+{% block content %}
+    <form method="post" action=".">{% csrf_token %}
+        <div class="col-md-4"></div><div class="col-md-3">
+        {{form|crispy}}
+        <button class='btn btn-lg btn-primary btn-block' type="submit">Sign In</button>
+        <input type="hidden" name="next" value="/home"/>
+        </div>
+    </form>
+        
+{% endblock %}

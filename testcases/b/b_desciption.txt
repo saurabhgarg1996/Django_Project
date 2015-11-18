@@ -1,0 +1,8 @@
+
+Explanation:
+
+Here ABC, DEF and GHI can clearly get EP B.Tech because CS can accomodate them and EP strength doesn't fall below 12 which is 80% (since 11 is <75%, so at max 3 can go from EP). JKL and MNO don't get a branch change in the first iteration because of the 75%rule in EP. PQR could have gone to CS or EE but since there exists a higher cpi person (JKL) who has the same preferences as PQR, PQR is unable to get a branch change too. So, the final answer is The top three getting a branch change and the rest not.
+
+"The feature depicted here is that - If there is a higher CPI person who doesn't get a branch chnage then no one with lesser cpi should get a branch change to the same branches."
+
+   

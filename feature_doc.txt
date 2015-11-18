@@ -1,0 +1,361 @@
+--------------------------------------------------------------------------------------------------------------------------
+Feature: 
+
+	There can't be 2 users with same username
+
+	Test Case 1:
+
+		----Go to register page and register a user
+		----Again go to the register page 
+		----Register the user with same username as the previous user
+
+	Expected Behaviour:
+
+	----Page reloads with and an error meaasage shows up stating. "Username already exists"
+
+--------------------------------------------------------------------------------------------------------------------------
+
+Feature:
+
+	A registered user can fill in the Branch change form for only 1 student.
+
+	Test Case:
+
+		----Register a user.
+		----Fill the Branch Change Form of a student with that user
+		----Logout
+		----Login again with the same username.
+
+		Expected Behaviour:
+
+		----The user is redirected to a page showing his/her filled details.It has an update button.
+
+--------------------------------------------------------------------------------------------------------------------------
+Feature: 
+
+	Reset Button on the Branch Change form filling page clears all the data filled by the user.
+
+		Test Case 1:
+
+		----Fill data in the Branch change form with a registered User
+		----Click the  Reset Button 
+
+		Expected Beahviour:
+
+		----The data filled in the forms gets cleared
+
+--------------------------------------------------------------------------------------------------------------------------
+Feature: 
+
+	A Student with invalid Roll Number, i.e. his/her roll number is not in the static input file of the enrolled students,is not allowed 
+	to submit his her form.
+
+	
+	Test Case 1:
+
+		----Fill the Branch change form with a registered user with a roll number, not in the input file
+		----Click Submit
+
+		Expected Behaviour: 
+
+		----The page reloads with the roll number field cleared and an error message is shown near it stating,"Please Enter	a Valid
+			Roll Number" and the user must correct the mistake before he/she can submit the .
+
+--------------------------------------------------------------------------------------------------------------------------
+Feature: 
+
+	If a user inputs a cpi out of the range, i.e. if cpi<0 or cpi >10 or a cpi with more than two decimal places or more than 4 digits 
+	he/she can't submit the form 
+	
+	Test Case 1: 
+
+		----Fill the Branch change form with a registered user with a cpi<0 or >10
+		----Click Submit
+
+		Expected Behaviour:
+
+		----The page reloads with the Cpi field cleared and an error message is shown near it stating,"Please Enter a Valid Cpi "and 
+			the user must correct the mistake before he/she can submit the form.
+
+	Test Case 2: 
+
+		----Fill the Branch change form with a registered user having category GE/OBC with cpi < 8 or SC/ST with cpi < 7
+		----Click Submit
+
+		Expected Behaviour:
+
+		----The page reloads with a pop up message warning the student that his/her cpi is low for eligibility.
+
+	Test Case 3: 
+
+		----Fill the Branch change form with a registered user with a cpi with more than 2 decimal places
+		----Click Submit
+
+		Expected Behaviour:
+
+		----The page reloads with the Cpi field cleared and an error message is shown near it stating,"Ensure that there are not more than two decimal 
+			places in" and the user must correct the mistake before he/she can submit the form.
+
+	Test Case 4: 
+
+		----Fill the Branch change form with a registered user with a cpi with more than 4 digits.
+		----Click Submit
+
+		Expected Behaviour:
+
+		----The page reloads with the Cpi field cleared and an error message is shown near it stating,"Ensure that there are not more than 4 digits in 	
+			total "and the user must correct the mistake before he/she can submit the form.
+
+--------------------------------------------------------------------------------------------------------------------------
+Feature: 
+
+	A user can't submit his/her form if he/she inputs a cpi which doesn't match with the roll nunber in the static input file.
+	
+	Test Case 1:
+
+		----Login to the Branch change form with a registered user
+		----Enter a valid roll number present in the input file
+		----Enter a valid cpi between 0 and 10 (both inclusive)
+		----Make sure that the student with the entered roll number has a cpi (in the static file) different from that entered.
+		----Click Submit
+
+		Expected Behaviour:
+
+		----The page reloads with the Cpi and Roll Number fields cleared and an error message is shown it stating that ,"CPI and Roll Number 
+			don't match	"and the user must correct the mistake before he/she can submit the form.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+Feature: 
+
+	There can't be two users who can submit the Branch Change form with same roll number.
+
+	Test Case 1:
+
+		----Register two users
+		----Login the first user and fill the form and submit it
+		----Login the second user and fill the form with the same roll number that the the first user filled
+		----Submit it
+
+		Expected Behaviour: 
+
+		----The page reloads with the Roll Number field cleared and an error message is shown it stating that ,"The Roll Number has already applied" 
+			and the user must correct the mistake before he/she can submit the form.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+Feature: 
+
+	A user who has filled the branch change form can see and update his filled details.
+
+	Test Case 1:
+
+		----Register a user and fill the Branch change form .
+		----Login again with the same user.
+
+		Expected Behaviour:
+
+		----A page will be loaded with the filled details of that user
+
+	Test Case 2:
+
+		----Register a user and fill the Branch change form .
+		----Login again with the same user and click the update button
+
+		Expected Behaviour:
+
+		----The user's record is cleared from the database.
+		----The user is redirected to the Branch Change form page, with all his filled details shown in the forms which he can update and submit
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+Feature: 
+
+		Whenever and error shows up in the field validation, only those fields with wrong data are cleared, rest of the fields maintain the filled data.
+
+	Test Case 1:
+
+	----Login a registered user
+	----Fill the Branch change form with errors in some field
+
+	Expected Behaviour:
+
+	----Only those fields with the errors are cleared with error messages shown, rest of the fields maintain the filled data
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+Feature: 
+
+	Background assist messages in the form fields and the username who has logged in shows up in the naviagtion bar.
+
+	Test Case 1:
+
+	----Login a registered user 
+
+	Expected Behaviour:
+
+	----The input form has messages in the the field texboxes and the username shows up in the navigation bar.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+Feature: 
+
+	Robust,Dynamic and Interactive Preference List of Branches
+	
+	Test Case 1:
+
+		----Login to the Branch Change form page
+		----Choose present branch and first preference
+
+		Expected Behaviour:
+
+		----A new field appears for second preference and the present and the first preference branches are removed from the list of the second 
+			preference. Similiarly if second preference is chosen a new field for third preference appears with the correct choices.
+			This is done to avoid wrong list of preferences, multiple preferences with same branch,etc.
+
+	Test Case 2:
+	
+		----Login to the branch change form page
+		----Fill present branch and a few preferences
+		----Change any of the preference filled
+
+		Expected Behaviour:
+
+		----When we change a filled preference to another branch, all but 1 preferences below it get hidden, and the next preference has choices not
+			containing any of the above preferences. When we change a filled preference to "None", all the preferences below it get hidden and the choice list of the preference gets updated accordingly.
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------------------
+Feature:
+
+	Admin page will load up from the login portal on entering the required "Admin" username and password. It will contain following functionalities :
+		(i) Upload Documents 
+		(ii) Delete All Uploaded Documents
+		(iii) View Applications of all Applied Candidates
+		(iv) Apply Branch Change Algorithm on both imported data or on data of applied candidates
+		(v) (Extra Feature) We can also generate Random data for some random 100 15xxxxxxx roll number with their random CPI's. On doing this all previous imported data for this field will be lost.
+
+	Test Case:
+
+		---Register user as admin
+		---Navigate through page to explore all options available
+
+	Expected Behaviour :
+
+		--- If username entered on login page is "admin" Admin will be rendered to Admin page iff password matches 
+		--- Else if username is that of any other registered user, user will be rendered to Fill form page
+		--- Else it will throw back corresponding error. 
+--------------------------------------------------------------------------------------------------------------------------
+
+Feature:
+
+	Upload any Number of documents. The list of uploaded documents will be shown on top of the page.
+	On uploading Students_data.csv it automatically populates database for verification of students on Branch change application forum.
+	
+	Test Case:
+		
+		---	Upload any number of files.
+		--- Upload Students_data.csv to populate database
+		--- Needed Files :
+			(i) Static File : Input_programmes.csv
+			(ii) Static File : Students_data.csv (Roll_number and CPI details)
+			(iii) Dynamic File : Input_options.csv
+
+	Expected behaviour:
+
+		--- A list of all uploaded files will be shown at the top 
+		--- The database corresponding to the uploaded Students_data.csv file can be checked on Django admin.
+
+--------------------------------------------------------------------------------------------------------------------------Feature :
+
+	Delete all uploaded documents (This will help in avoiding wrong uploads).
+	
+	Test Case:
+	
+		--- Use the option delete all uploaded files on the page.
+
+	Expected Behaviour :
+
+		--- A input message will pop asking for confirmation 
+		--- On confirming, all uploaded files will be deleted and an empty list will be shown at the top of the page 
+		--- Rejection will just reload the page 
+
+--------------------------------------------------------------------------------------------------------------------------
+Feature:
+	
+	View all applications feature has been provided to admin, so that he can view details of all Applied Candidates on webpage itself and as and when needed he can export (download) it as csv.
+
+	Test Case :
+
+		--- Login as a user and fill form for some students
+		--- Login as admin and click on View All Applications
+	
+	Expected Behaviour:
+
+		--- If the entered data was valid it will be saved in the data.
+		--- This admin feature will now show up all those valid candidates in form a table on the webpage which can be 			exported at anytime as csv file.
+		--- File will be Downloaded as Applied_Students.csv
+
+--------------------------------------------------------------------------------------------------------------------------
+Feature:
+	
+	Branch Change algorithm can be used on imported csv file or on Applied Candidates data. Branch Algorithm portal provides admin with two different options (imported data or entered data) on which he/she can run the algorithm
+	
+	Test Case :
+
+		--- Click to submit any of the above option
+
+	Expected Behaviour :
+
+		--- Admin will be redirected to a page containing Allotment Data (of corresponding sumbit button) i.e. Statistics 	  of all Branches in form of a Table and list of students with their details of allotment
+		--- Both of these tables have options of Downloading (exporting) them as CSV files
+		--- Files will be Downloaded as "output_stats.csv" and "allotment.csv" corresponding to Imported Data
+		--- Files will be Downloaded as "output_stats_applied.csv" and "allotment_applied.csv" corresponding details 		filled by user
+
+--------------------------------------------------------------------------------------------------------------------------
+Feature:
+
+	Generate randon data for some random 100 Roll Numbers with thier Random CPI. Now this will be used to validate students.
+
+	Test Case:
+		
+		--- Login as user to filol the form 
+		--- Enter CPI corresponding to any roll number generated
+			(To check which all roll numbers are generated admin can use django admin database)
+
+	Expected Behaviour :
+
+		--- If entered CPI matches with the corresponding roll number, the application will be accepted 
+		--- else correspondiong error will be thrown
+
+--------------------------------------------------------------------------------------------------------------------------
+Feature:
+
+	Admin can login to django admin from option available in the fixed Navigation bar.
+
+	Test Case:
+
+		--- Enter Username and password of superuser created before
+
+	Expected Behaviour : 
+
+		--- Rendered to page containing data of all registered users and students
+		--- Django Admin has ability to manipulate all the uploaded data by clicking on various model forms options 		available
+		--- Logout before exiting the Django admin Page. 
+
+--------------------------------------------------------------------------------------------------------------------------
+Feature :
+
+	Access Rights are correctly given to user and admin i.e. if user exits without logout his login portal will open up.
+	And manually redirecting to a specific link would not work.
+
+	Test Case 1 :
+		--- Login any user or admin and exit portal
+		--- Reopen the link after running the server
+
+	Expected Behaviour :
+		--- User or Admin will be redirected to his/her page.
+
+	Test Case 2 :
+		--- Try to open any link as a guest i.e. without logging in as user or admin
+
+	Expected Behaviour :
+		--- Guest will be redirected to home page. 
+
+--------------------------------------------------------------------------------------------------------------------------	

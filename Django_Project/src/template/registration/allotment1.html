@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Branch Change Portal {% endblock %}
+{% block user %} | {{user.username}} {% endblock %}
+{% block nav %} <a class="btn btn-success" href="/logout/" role="button">Logout</a>{% endblock %}
+{% block head %}
+Welcome to the Branch Change Portal of IITB
+{% endblock %}
+
+{% block content %} 
+    <h4 class="page-header"> Branch Change Results: </h4>
+    {% if Allotted %}
+    <div >
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Roll No.</th>
+                <th>Name</th>
+                <th>Present Branch</th>
+                <th>Alloted Branch</th>
+              </tr>
+            </thead>
+             <tbody>
+            {% for dt in Allotted %}
+           
+              <tr>
+                <td>{{ dt.roll_number}}</td>
+                <td>{{ dt.name }}</td>
+                <td>{{ dt.present_branch }}</td>
+                <td>{{ dt.allotted_branch }}</td>
+              </tr>
+            
+            {% endfor %}
+            </tbody>
+          </table>
+      </div>
+
+    {% else %}
+      <p>No data.</p>
+    {% endif %}
+    <hr>
+  <div class="col-md-4"></div><div class="col-md-3">
+<a class='btn btn-lg btn-primary btn-block' href="/download/allotment_applied.csv" role="button">Download as CSV</a>
+</div>
+<br>
+<br>
+<hr>
+  <h4 class="page-header"> Statistics : </h4>
+    {% if Stats %}
+    <div >
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Programme</th>
+                <th>Cut off</th>
+                <th>Sanctioned Strength</th>
+                <th>Original Strength</th>
+                <th>Final Strength</th>
+              </tr>
+            </thead>
+             <tbody>
+            {% for dt in Stats %}
+           
+              <tr>
+                <td>{{ dt.program}}</td>
+                <td>{{ dt.cutoff }}</td>
+                <td>{{ dt.sanctionedStrength}}</td>
+                <td>{{ dt.originalStrength }}</td>
+                <td>{{ dt.finalStrength }}</td>
+              </tr>
+            
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+    {% else %}
+      <p>No data.</p>
+    {% endif %}
+    <hr>
+    </div>
+  <div class="col-md-4"></div><div class="col-md-3">
+<a class='btn btn-lg btn-primary btn-block' href="/download/output_stats_applied.csv" role="button">Download as CSV</a>
+<hr>
+  <a class='btn btn-lg btn-primary btn-block' href="/admin1/" role="button">Admin Home</a>
+  <hr>
+  <br>
+<br>
+<br>
+<br>
+</div>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+
+Explanation:
+
+This is a test case which was given as the sample in the resources folder. This is the branch change data of last year. The output matches with the actual branch change result of last year. It runs in one iteration and uses some boundary cases. The output matches the actual result provided to us. 
+
+The speciality of the test case is that it is a practical one and contains a large number of records (115). 
+
+Moreover, the features used here are:
+
+1. HTA and HIR: Both have the same initial branch and the same cpi, but the intial branch 'CH' gets below 75% rule if both of them are removed. But since IITB is liberal and both have same CPI and same source branch both get a branch change. People with same CPI and same initial branch get changes even if it violates the 75% rule
+
+2. MAY and HRY: Both of them have the same CPI 9.57 and had filled for CS B.Tech, but CS could accomodate only one of them. But in view of fairness, both were given a branch change by extending seats of CS (violating the 10% rule)
+ 

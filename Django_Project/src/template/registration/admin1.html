@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Branch Change Portal {% endblock %}
+{% block user %} | {{user.username}} {% endblock %}
+{% block nav %} <a class="btn btn-success" href="/admin/" role="button">Django Admin</a> <a class="btn btn-success" href="/logout/" role="button">Logout</a>{% endblock %}
+{% block head %}
+Welcome to the Branch Change Portal of IITB
+{% endblock %}
+
+{% block content %} 
+
+	<hr>
+		<h4> Uploaded Documents : </h4>
+		{% if documents %}
+		<ul>
+			{% for document in documents %}
+				<li><a href="{{ document.docfile.url}}">{{ document.docfile.name}}</a></li>
+			{% endfor %}
+		</ul>
+		{% else %}
+			<p>No documents.</p>
+		{% endif %}
+		<hr>
+	<div class="col-md-4"></div><div class="col-md-3">
+
+<a class='btn btn-lg btn-primary btn-block' href="/admin1/upload/" role="button">Upload Files</a>
+<hr>
+<a class='btn btn-lg btn-primary btn-block' href="javascript:clicked();" id="x" role="button">Delete All Uploaded Files</a>
+<hr>
+<a class='btn btn-lg btn-primary btn-block' href="/admin1/table/" role="button">View All Applications</a>
+<hr>
+<a class='btn btn-lg btn-primary btn-block' href="/admin1/algorithm/" role="button">Branch Change Algorithm</a>
+<hr>
+ <a class='btn btn-lg btn-primary btn-block' href="/admin1/roll_to_cpi/" role="button">Generate Random Data</a>
+</div>
+{% endblock %}
+{% block script %}
+<script type="text/javascript">
+    function clicked() {
+    
+	    var r = confirm("Are you Sure you want to delete!");
+	    if (r == false) {
+	        	window.location = "/admin1/"
+	        }
+	    else
+	    {
+	    	window.location = "/delete"
+	    }
+	}
+   </script>
+{% endblock %}

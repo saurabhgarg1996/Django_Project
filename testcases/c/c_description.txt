@@ -1,0 +1,9 @@
+
+Explanation:
+
+Here the first person G can't leave his source branch b, because his cpi < 9.0 and his source branch is getting shortened. At the next cpi there are 3 people - A, C and B. A can move to his first preference because x has enough people and a has an empty place to fill. He therefore goes to a. Now B cannot move from a as the strength of a is now 3 and no one can move without violating the 75% rule. Now when the iteration comes to C, as a guy with the same cpi as C and the same source branch and the same target branch too got a branch change, just the strengths of branches x and a doesn't matter and he too gets a branch change. Then D gets his third preference b. E can move from a and can get accomodated at b because it is 3 filled out of 4. So, he too goes. F is ineligible and he is removed even before the iteration starts becuase he belongs to GE and his cpi <8.0. In the next iteration as a is large enough now, B can safely move out to y, thus completing the test case.
+
+Feature depicted - "If two people have the same cpi and the same source or same target branch, even if the strength rules prevent one from going and the other one safely gets a branch change, both should get a branch change even if the source branch shortens or the target branch extends."
+
+
+Herex was getting shortened, still, C was moved from X in leiu of same CPI.  

@@ -1,0 +1,5 @@
+Explanation:
+
+A can get from x to y, as y is just partially filled of 2 out of 3, (2/3rds).Now he goes to y. B can't leave x now else x would fall below 75%. As C D and E have same cpi, and D and E have same target and C and D have same source, all three of them will either get or not get a change of branch. As per the algorithm (in order to reduce iterations), we first check E and as E can move from a to b, D gets a branch change from y to b and so, C gets a branch change too as a guy of same cpi as him could get a branch change from the same source branch. Now, F can get a branch change to x and leaves a which now falls to a strength of 8. bis at 3 now, and hence G can move to x as x is at 8 and can take in more people. Now, in the second iteration B is in the list still, and gets a change to y as y is filled to only 1 seat. So, B gets a change to y. But now, F can't move from x as x is now at a strength of 8 and his leaving will bring it down to 75%. No other rule is violated here.
+
+So this is valid.   

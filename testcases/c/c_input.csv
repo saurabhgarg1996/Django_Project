@@ -1,0 +1,7 @@
+1,A,x,8.7,GE,a,y,b
+2,B,a,8.7,GE,y,z
+3,C,x,8.7,GE,a,z
+4,D,y,8.68,SC,z,a,b
+5,E,a,8.6,GE,b
+6,F,z,7.8,GE,x,y,a,b
+7,G,b,8.98,GE,x,y,z

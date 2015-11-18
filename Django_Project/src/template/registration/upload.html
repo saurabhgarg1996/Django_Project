@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Branch Change Portal {% endblock %}
+{% block user %} | {{user.username}} {% endblock %}
+{% block nav %} <a class="btn btn-success" href="/logout/" role="button">Logout</a>{% endblock %}
+{% block head %}
+Welcome to the Branch Change Portal of IITB
+{% endblock %}
+{% block content %} 
+	<hr>
+		<h4> Uploaded Documents : </h4>
+		{% if documents %}
+		<ul>
+			{% for document in documents %}
+				<li> <a href="{{ document.docfile.url}}">{{ document.docfile.name}}</a> </li>
+			{% endfor %}
+		</ul>
+		{% else %}
+			<p>No documents.</p>
+		{% endif %}
+		<hr>
+<div class="col-md-4"></div><div class="col-md-3">
+		<form action="{% url "list" %}" method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form | crispy }}
+			<!-- <a class='btn btn-lg btn-primary btn-block' href="/admin1/upload" role="button" type="submit">Upload</a> -->
+			<input class='btn btn-lg btn-primary btn-block' href="/admin1/" type="submit" value="Upload" />
+			
+		</form>
+<!-- 	<hr>
+<a class='btn btn-lg btn-primary btn-block' href="/admin1/upload" role="button">Upload Files</a> -->
+<hr>
+<a class='btn btn-lg btn-primary btn-block' href="/delete" role="button">Delete All Uploaded Files</a>
+<hr>
+<a class='btn btn-lg btn-primary btn-block' href="/admin1" role="button">Admin Home</a>
+</div>
+{% endblock %}
+
+	<body>
+
+		<form action="{% url "list" %}" method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			<p>{{ form.non_field_errors }}</p>
+			<p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
+			<p>
+				{{ form.docfile.errors }}
+				{{ form.docfile }}
+			</p>
+			<p><input type="submit" value="Upload" /></p>
+		</form>
+		
+	</body>
+
+</html> 
